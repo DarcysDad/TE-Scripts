@@ -1,0 +1,22 @@
+//CREATE MEASURES CODE TO BUILD MEASURES FOR PIVOTED TABLE 
+
+=CONCATENATE("MEASURE 'PMD Measures'[KPI ", A1, " Limit/Target] = [Measure TBC]")
+
+=CONCATENATE("MEASURE 'PMD Measures'[KPI ",A1,"] = ""Measure Label TBC",A1,"""")
+
+=CONCATENATE("MEASURE 'PMD Measures'[KPI ",A1," Value] = [Measure TBC] FormatString = ""0""")
+
+=CONCATENATE("MEASURE 'PMD Measures'[KPI ",A1," Department] = ""TBC""")
+
+
+
+
+//CREATE THE PIVOTED TABLE FROM MEASURES
+
+PMD KPI Summary = UNION(
+SELECTCOLUMNS('PMD Measures', "KPI", [KPI 1], "Value", [KPI 1 Value], "Limit/Target", [KPI 1 Limit/Target], "Department", [KPI 1 Department]),
+SELECTCOLUMNS('PMD Measures', "KPI", [KPI 2], "Value", [KPI 2 Value], "Limit/Target", [KPI 2 Limit/Target], "Department", [KPI 2 Department]),
+SELECTCOLUMNS('PMD Measures', "KPI", [KPI 3], "Value", [KPI 3 Value], "Limit/Target", [KPI 3 Limit/Target], "Department", [KPI 3 Department]),
+SELECTCOLUMNS('PMD Measures', "KPI", [KPI 4], "Value", [KPI 4 Value], "Limit/Target", [KPI 4 Limit/Target], "Department", [KPI 4 Department]),
+SELECTCOLUMNS('PMD Measures', "KPI", [KPI 5], "Value", [KPI 5 Value], "Limit/Target", [KPI 5 Limit/Target], "Department", [KPI 5 Department])
+)
